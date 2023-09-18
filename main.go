@@ -126,5 +126,5 @@ func main() {
 	mux.Handle("/assets/", http.StripPrefix("/assets/", fs))
 	mux.HandleFunc("/", indexHandler)
 	mux.HandleFunc("/search", searchHandler(newsapi))
-	http.ListenAndServe(":"+port, mux)
+	http.ListenAndServe("0.0.0.0:"+port, mux)
 }
