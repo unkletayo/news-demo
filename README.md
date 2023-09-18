@@ -57,8 +57,6 @@ To run the project, follow these steps:
    go run main.go
    ```
 
-5. Access the API by opening a web browser or using a tool like [curl](https://curl.se/) or [Postman](https://www.postman.com/). The API endpoints are defined in the `router.go` file.
-
 ## API Endpoints
 
 - `/search?q={id}`: Retrieves a specific news article by its ID from the external API.
