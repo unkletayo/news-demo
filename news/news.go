@@ -64,3 +64,9 @@ func (c *Client) FetchEverything(query, page string) (*Results, error) {
 	res := &Results{}
 	return res, json.Unmarshal(body, res)
 }
+
+func (a *Article) FormatPublishedDate() string {
+	year, month, day := a.PublishedAt.Date()
+
+	return fmt.Sprintf("%v %d, %d", month, day, year)
+}

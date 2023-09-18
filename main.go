@@ -26,12 +26,29 @@ var tpl = template.Must(template.ParseFiles("index.html"))
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	buf := &bytes.Buffer{}
-	err := tpl.Execute(w, buf)
+	err := tpl.Execute(buf, nil)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 
-	buf.WriteTo((w))
+	buf.WriteTo(w)
+}
+
+func (s *Search) IsLastPage() bool {
+	return s.NextPage >= s.TotalPages
+}
+
+func (s *Search) CurrentPage() int {
+	if s.NextPage == 1 {
+		return s.NextPage
+	}
+
+	return s.NextPage - 1
+}
+
+func (s *Search) PreviousPage() int {
+	return s.CurrentPage() - 1
 }
 
 func searchHandler(newsapi *news.Client) http.HandlerFunc {
@@ -69,6 +86,10 @@ func searchHandler(newsapi *news.Client) http.HandlerFunc {
 			Results:    results,
 		}
 
+		if ok := search.IsLastPage(); ok {
+			search.NextPage++
+		}
+
 		buf := &bytes.Buffer{}
 		err = tpl.Execute(buf, search)
 		if err != nil {
@@ -103,7 +124,7 @@ func main() {
 
 	mux := http.NewServeMux()
 	mux.Handle("/assets/", http.StripPrefix("/assets/", fs))
-	mux.HandleFunc("/search", searchHandler(newsapi))
 	mux.HandleFunc("/", indexHandler)
+	mux.HandleFunc("/search", searchHandler(newsapi))
 	http.ListenAndServe(":"+port, mux)
 }
