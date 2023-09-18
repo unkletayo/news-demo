@@ -1,27 +1,74 @@
-# News Demo starter files
+# News Demo
 
-Starter files for the News application built with Go. Tutorial:
-https://freshman.tech/web-development-with-go/
+### This project was done following this awesome [Tutorial](https://freshman.tech/web-development-with-go/)
 
-Here's what the [completed application](https://freshman-news.herokuapp.com/)
-looks like:
+<br>
+<br>
+<br>
 
-![demo](https://ik.imagekit.io/freshman/news-demo_MrYio9GKlzSi.png)
+This is a simple Go project designed to test the capabilities of the Go HTTP router by fetching news from an external API endpoint. The project demonstrates the basic structure of a Go application, showcases how to set up routing using the HTTP router, and performs API requests to retrieve news data.
 
-The code in this repo is meant to be a starting point for anyone following
-along with the tutorial.
+## Project Structure
 
-## Prerequisites
+The project structure is organized as follows:
 
-You need to have [Go](https://golang.org/dl/) installed on your computer. The
-version used to test the code in the tutorial is **1.15.3**.
-
-## Get started
-
-- Clone or download this repository to your filesystem.
-
-```bash
-$ git clone https://github.com/Freshman-tech/news-demo-starter-files
+```plaintext
+golang-h
+│
+├── assets/
+|   └─── style.css
+├── main.go
+├── news/
+│   └─── news.go
+│
+└── README.md
 ```
 
-- `cd` into the project directory and follow along with the [tutorial](https://freshman.tech/web-development-with-go/).
+- **main.go**: The entry point of the application where the server is initialized.
+- **assets/**: Contains the static files (css)
+- **news/**: Contains handles logic for fetching data
+- **README.md**: This file, providing an overview of the project.
+
+## Usage
+
+To run the project, follow these steps:
+
+1. Clone this repository to your local machine:
+
+   ```bash
+   git clone https://github.com/unkletayo/news-demo.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd news-demo
+   ```
+
+3. Install any required dependencies:
+
+   ```bash
+   go mod download
+   ```
+
+4. Run the application:
+
+   ```bash
+   go run main.go
+   ```
+
+5. Access the API by opening a web browser or using a tool like [curl](https://curl.se/) or [Postman](https://www.postman.com/). The API endpoints are defined in the `router.go` file.
+
+## API Endpoints
+
+- `/search?q={id}`: Retrieves a specific news article by its ID from the external API.
+
+## Contributing
+
+Feel free to contribute to this project by opening issues, submitting pull requests, or adding additional features to enhance its functionality.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt) file for details.
+
+---
